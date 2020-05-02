@@ -6,26 +6,48 @@
 
 <body>
 
-    <h1>Where is the ISS?</h1>
-    <p>latitude: <span id="lat"></span><br />
-        latitude: <span id="long"></span>
-    </p>
+    <canvas id="myChart" width="400" height="400"></canvas>
 
 <script>
-const api_url = 'https://api.wheretheiss.at/v1/satellites/25544';
-async function getISS() {
+const xlabels [];
+
+const api_url = 'https://sandbox.iexapis.com/stable/stock/IBM/quote?token=Tpk_1e6e223aef034078b46bad220edfe3cb';
+async function getData() {
     const response = await fetch(api_url);
     const data = await response.json();
-    const { latitude, longitude } = data;
+    const { open, close } = data;
 
-    document.getElementById('lat').textContent = latitude;
-    document.getElementById('long').textContent = longitude;
 }
 
-getISS();
 
+async function chartIt(){
+  await getData();  
+const ctx = document.getElementById('myChart').getContext('2d');
+const myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ['open', 'close'],
+        datasets: [{
+            label: '# of Votes',
+            data: [open, close],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+
+            ],
+            borderWidth: 1
+        }]
+    },
+});
+}
+
+chartIt();
 
 </script>
+
 
 </body>
 
