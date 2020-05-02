@@ -6,7 +6,10 @@
 
 <body>
 
+    <p> Opening Price <span id="open"></span></p>
+
     <canvas id="myChart" width="400" height="400"></canvas>
+
 
 <script>
 const xlabels [];
@@ -16,6 +19,10 @@ async function getData() {
     const response = await fetch(api_url);
     const data = await response.json();
     const { open, close } = data;
+
+
+    document.getElementById("open") = open;
+     
 
 }
 
